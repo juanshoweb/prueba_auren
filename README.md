@@ -1,4 +1,4 @@
-# Nombre de tu proyecto
+# CRUD de paises
 
 Systema operativo : Linux (ubuntu)
 
@@ -33,27 +33,12 @@ Crud sencillo hecho con :
 
 ## Ejecución de pruebas unitarias: (desde la Raíz del proyecto)
 
-./vendor/bin/phpunit src/tests/Controller/CountryControllerTest.php
-./vendor/bin/phpunit src/tests/Service/CountryServiceTest.php
+- ./vendor/bin/phpunit src/tests/Controller/CountryControllerTest.php
+- ./vendor/bin/phpunit src/tests/Service/CountryServiceTest.php
            
 ## Extra
 
-1. Borrar cache: (desde la raíz del proyecto)
+1. Borrar cache (desde la raíz del proyecto):
     docker-compose run php bash -c "php bin/console cache:clear"
 
-2. Extructura de proyecto 
 
-project-root/
-|-- docker/
-|   |-- nginx/
-|   |   |-- Dockerfile
-|   |   |-- nginx.conf
-|   |   `-- symfony.conf
-|   |-- php/
-|   |   |-- Dockerfile
-|   |   `-- php.ini
-|   `-- mysql/
-|       |-- Dockerfile
-|       `-- my.cnf
-|-- src/
-|-- docker-compose.yml
