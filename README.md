@@ -17,19 +17,19 @@ Crud sencillo hecho con :
 1. Clona este repositorio: git clone https://github.com/juanshoweb/prueba_auren.git
 
 2. Crea la imagenes y levanta los contendores de Docker
-    docker-compose down
-    docker-compose build
-    docker-compose up -d
+    - docker-compose down
+    - docker-compose build
+    - docker-compose up -d
 
 3. Crea las migraciones
     - Entrar al contenedor de php : 
-        docker-compose exec php bash
+        - docker-compose exec php bash
     - Ejucutar las migraciones :
-        php bin/console make:migration
-        php bin/console doctrine:migrations:migrate
+        - php bin/console make:migration
+        - php bin/console doctrine:migrations:migrate
 
 4. Actualización de paquetes 
-    composer install
+    - composer install
 
 ## Ejecución de pruebas unitarias: (desde la Raíz del proyecto)
 
