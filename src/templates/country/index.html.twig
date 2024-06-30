@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Country index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Country index</h1>
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <a href="{{ path('app_country_new') }}" class="btn btn-primary mb-3">Create new</a>
+        
+        <div class="input-group mb-3">
+            <input type="text" id="country-search" class="form-control" placeholder="Search countries">
+            <div class="input-group-append">
+                <button id="search-button" class="btn btn-primary" type="button">Search</button>
+            </div>
+        </div>
+
+         <div id="country-list">
+            {% include 'country/_country_list.html.twig' with {'countries': pagination.items} %}
+        </div>
+
+
+        <button class="btn btn-warning" id="truncate-and-reload-button">Actualizar desde Api</button>
+
+
+        <div class="pagination justify-content-center">
+            {{ knp_pagination_render(pagination, 'pagination/bootstrap_v5_pagination.html.twig') }}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search-button').on('click', function() {
+                var query = $('#country-search').val();
+                $.ajax({
+                    url: '{{ path('app_country_search') }}',
+                    data: { query: query },
+                    success: function(data) {
+                        $('#country-list').html(data);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            });
+
+             // Para el botón de eliminar
+            $('form[id^="delete-form"]').submit(function(e) {
+                if (!confirm('Are you sure you want to delete this country?')) {
+                    e.preventDefault(); // Cancela el envío del formulario si no se confirma
+                }
+            });
+
+            $('#truncate-and-reload-button').on('click', function() {
+                if (confirm('Esto borrará todo los datos de BD y actualizará desde la Api')) {
+                    $.ajax({
+                        url: '{{ path('app_country_truncate_and_reload') }}',
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token('truncate_and_reload') }}'
+                        },
+                        success: function(data) {
+                            if (data.status === 'success') {
+                                alert(data.message);
+                                location.reload(); // Recargar la página para ver los cambios
+                            } else {
+                                alert(data.message);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX Error:', status, error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}

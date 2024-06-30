@@ -1,0 +1,61 @@
+{% if pageCount > 1 %}
+    <nav>
+        <ul class="pagination justify-content-center">
+            {% if previous is defined %}
+                <li class="page-item">
+                    <form method="get" action="{{ path(app.request.attributes.get('_route')) }}">
+                        {% for key, value in app.request.query.all %}
+                            {% if key != 'page' %}
+                                <input type="hidden" name="{{ key }}" value="{{ value }}">
+                            {% endif %}
+                        {% endfor %}
+                        <input type="hidden" name="page" value="{{ previous }}">
+                        <button class="page-link" type="submit">&laquo;</button>
+                    </form>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <button class="page-link" type="button">&laquo;</button>
+                </li>
+            {% endif %}
+
+            {% for page in pagesInRange %}
+                {% if page != current %}
+                    <li class="page-item">
+                        <form method="get" action="{{ path(app.request.attributes.get('_route')) }}">
+                            {% for key, value in app.request.query.all %}
+                                {% if key != 'page' %}
+                                    <input type="hidden" name="{{ key }}" value="{{ value }}">
+                                {% endif %}
+                            {% endfor %}
+                            <input type="hidden" name="page" value="{{ page }}">
+                            <button class="page-link" type="submit">{{ page }}</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="page-item active">
+                        <button class="page-link" type="button">{{ page }}</button>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if next is defined %}
+                <li class="page-item">
+                    <form method="get" action="{{ path(app.request.attributes.get('_route')) }}">
+                        {% for key, value in app.request.query.all %}
+                            {% if key != 'page' %}
+                                <input type="hidden" name="{{ key }}" value="{{ value }}">
+                            {% endif %}
+                        {% endfor %}
+                        <input type="hidden" name="page" value="{{ next }}">
+                        <button class="page-link" type="submit">&raquo;</button>
+                    </form>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <button class="page-link" type="button">&raquo;</button>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}

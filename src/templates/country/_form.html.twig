@@ -1,0 +1,25 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    <div class="form-group mb-3">
+        {{ form_label(form.name, 'Country Name', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.name, {'attr': {'class': 'text-danger'}}) }}
+    </div>
+    <div class="form-group mb-3">
+        {{ form_label(form.capital, 'Capital', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.capital, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.capital, {'attr': {'class': 'text-danger'}}) }}
+    </div>
+    <div class="form-group mb-3">
+        {{ form_label(form.region, 'Region', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.region, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.region, {'attr': {'class': 'text-danger'}}) }}
+    </div>
+    <div class="form-group mb-3">
+        {{ form_label(form.flag, 'Flag', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.flag, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.flag, {'attr': {'class': 'text-danger'}}) }}
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    </div>
+{{ form_end(form) }}

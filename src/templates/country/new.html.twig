@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create new Country{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Create new Country</h1>
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+            <div class="form-group mb-3">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.name) }}
+            </div>
+            <div class="form-group mb-3">
+                {{ form_label(form.capital) }}
+                {{ form_widget(form.capital, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.capital) }}
+            </div>
+            <div class="form-group mb-3">
+                {{ form_label(form.region) }}
+                {{ form_widget(form.region, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.region) }}
+            </div>
+            <div class="form-group mb-3">
+                {{ form_label(form.flag) }}
+                {{ form_widget(form.flag, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.flag) }}
+            </div>
+            <button class="btn btn-primary">Save</button>
+            <a href="{{ path('app_country_index') }}" class="btn btn-secondary">Back to list</a>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Country{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Country Details</h1>
+
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th scope="row">ID</th>
+                    <td>{{ country.id }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Name</th>
+                    <td>{{ country.name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Capital</th>
+                    <td>{{ country.capital }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Region</th>
+                    <td>{{ country.region }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="mb-3">
+            <a href="{{ path('app_country_index') }}" class="btn btn-secondary">Back to List</a>
+            <a href="{{ path('app_country_edit', {'id': country.id}) }}" class="btn btn-primary">Edit</a>
+            <form method="post" action="{{ path('app_country_delete', {'id': country.id}) }}" style="display: inline;">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ country.id) }}">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete {{ country.name }}?')">Delete</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

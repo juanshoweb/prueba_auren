@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Country{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="mb-4">Edit Country</h1>
+
+        <div class="card">
+            <div class="card-body">
+                {{ include('country/_form.html.twig', {'button_label': 'Update', 'attr': {'class': 'form-horizontal'}}) }}
+
+                <a href="{{ path('app_country_index') }}" class="btn btn-secondary mt-3">Back to list</a>
+                {#{ include('country/_delete_form.html.twig') }#}
+            </div>
+        </div>
+    </div>
+{% endblock %}
