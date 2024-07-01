@@ -1,5 +1,7 @@
 # CRUD de paises
 
+url del proyecto : http://localhost:8080/country/
+
 Systema operativo : Linux (ubuntu)
 
 Crud sencillo hecho con :
